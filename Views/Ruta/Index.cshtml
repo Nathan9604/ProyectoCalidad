@@ -1,13 +1,13 @@
 @model IEnumerable<AeropuertoCalidad.Models.Ruta>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Rutas";
 }
 
-<h1>Index</h1>
+<h1>Rutas</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Agregar</a>
 </p>
 <table class="table">
     <thead>
@@ -25,10 +25,10 @@
                 @Html.DisplayNameFor(model => model.Lugar)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Capacidadmaxima)
+                Capacidad Máxima
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CodigoaeropuertoNavigation)
+                Aeropuerto
             </th>
             <th></th>
         </tr>
@@ -55,9 +55,9 @@
                 @Html.DisplayFor(modelItem => item.CodigoaeropuertoNavigation.Codigo)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Codigo">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Codigo">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Codigo">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Codigo">Editar</a>
+                <a asp-action="Details" asp-route-id="@item.Codigo">Detalles</a>
+                <a asp-action="Delete" asp-route-id="@item.Codigo">Borrar</a>
             </td>
         </tr>
 }

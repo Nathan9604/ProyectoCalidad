@@ -1,12 +1,11 @@
 @model AeropuertoCalidad.Models.Aeropuerto
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Aeropuerto";
 }
 
-<h1>Create</h1>
+<h1>Agregar Aeropuerto</h1>
 
-<h4>Aeropuerto</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -33,13 +32,9 @@
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-primary" />
+                <a asp-action="Index">Volver</a>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
