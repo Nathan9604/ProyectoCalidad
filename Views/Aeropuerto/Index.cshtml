@@ -1,13 +1,13 @@
 @model IEnumerable<AeropuertoCalidad.Models.Aeropuerto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Aeropuertos";
 }
 
-<h1>Index</h1>
+<h1>Aeropuertos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Agregar</a>
 </p>
 <table class="table">
     <thead>
@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.Habilitado)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Codigo">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Codigo">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Codigo">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Codigo">Editar</a>
+                <a asp-action="Details" asp-route-id="@item.Codigo">Detalles</a>
+                <a asp-action="Delete" asp-route-id="@item.Codigo">Borrar</a>
             </td>
         </tr>
 }

@@ -1,34 +1,40 @@
 @model AeropuertoCalidad.Models.Vuelo
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Borrar Vuelo";
 }
 
-<h1>Delete</h1>
+<h1>Borrar Vuelo</h1>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Vuelo</h4>
+    <h6>¿Realmente desea borrar este vuelo?</h6>
     <hr />
+
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Capacidadreal)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Capacidadreal)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CodigorutaNavigation)
+            Ruta
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CodigorutaNavigation.Codigo)
         </dd class>
+        <dt class = "col-sm-2">
+            Fecha
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fecha)
+        </dd class>
+        <dt class = "col-sm-2">
+            Capacidad Real
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Capacidadreal)
+        </dd>
     </dl>
-    
+
     <form asp-action="Delete">
-        <input type="hidden" asp-for="Codigoruta" />
-        <input type="hidden" asp-for="Fecha" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input hidden asp-for="Fecha" asp-for="Codigoruta"/>
+        <input hidden asp-for="Fecha" value="@(ViewBag.FechaCorrecta)" />
+        <input type="submit" value="Borrar" class="btn btn-danger" />
+        <a asp-action="Index">Volver</a>
     </form>
 </div>

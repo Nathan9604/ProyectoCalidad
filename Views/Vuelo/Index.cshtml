@@ -1,22 +1,25 @@
 @model IEnumerable<AeropuertoCalidad.Models.Vuelo>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Vuelo";
 }
 
-<h1>Index</h1>
+<h1>Vuelos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Agregar</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Capacidadreal)
+                Ruta
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CodigorutaNavigation)
+                Fecha
+            </th>
+            <th>
+                Capacidad Real
             </th>
             <th></th>
         </tr>
@@ -25,15 +28,18 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Capacidadreal)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.CodigorutaNavigation.Codigo)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacidadreal)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { ruta = item.CodigorutaNavigation.Codigo, fecha = item.Fecha })
+                @Html.ActionLink("Detalles", "Details", new { ruta = item.CodigorutaNavigation.Codigo, fecha = item.Fecha })
+                @Html.ActionLink("Borrar", "Delete", new { ruta = item.CodigorutaNavigation.Codigo, fecha = item.Fecha })
             </td>
         </tr>
 }
