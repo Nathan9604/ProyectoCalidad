@@ -4,53 +4,69 @@
     ViewData["Title"] = "Borrar Ruta";
 }
 
-<h1>Borrar Ruta</h1>
+<head>
+  <link rel="stylesheet" type="text/css" href="~/css/Interfaz.css">
+</head>
 
-<div>
-    <h6>¿Realmente desea borrar esta ruta?</h6>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Empresa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Empresa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Hora)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Hora)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Lugar)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Lugar)
-        </dd>
-        <dt class = "col-sm-2">
-            Capacidad Máxima
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Capacidadmaxima)
-        </dd>
-        <dt class = "col-sm-2">
-            Aeropuerto
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CodigoaeropuertoNavigation.Codigo)
-        </dd class>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Codigo" />
-        <input type="submit" value="Borrar" class="btn btn-danger" />
-        <a asp-action="Index">Volver</a>
-    </form>
-</div>
+<h1 class="SubTitle">Borrar Ruta</h1>
+
+<section class="row">
+    <article class="col"></article>
+    <article class="Card col-6">
+        <h6 class="AlignCenter">¿Realmente desea borrar esta ruta?</h6>
+        <div class="row Items">
+            <dt class = "col ValueName d-flex justify-content-end">
+                @Html.DisplayNameFor(model => model.Empresa)
+            <dd class = "col Value">
+                @Html.DisplayFor(model => model.Empresa)
+            </dd>
+        </div>
+        <div class="row Items">
+            <dt class = "col ValueName d-flex justify-content-end">
+                @Html.DisplayNameFor(model => model.Hora)
+            </dt>
+            <dd class = "col Value">
+                @Html.DisplayFor(model => model.Hora)
+            </dd>
+        </div>
+        <div class="row Items">
+            <dt class = "col ValueName d-flex justify-content-end">
+                @Html.DisplayNameFor(model => model.Estado)
+            </dt>
+            <dd class = "col Value">
+                @Html.DisplayFor(model => model.Estado)
+            </dd>
+        </div>
+        <div class="row Items">
+            <dt class = "col ValueName d-flex justify-content-end">
+                @Html.DisplayNameFor(model => model.Lugar)
+            <dd class = "col Value">
+                @Html.DisplayFor(model => model.Lugar)
+            </dd>
+        </div>
+        <div class="row Items">
+            <dt class = "col ValueName d-flex justify-content-end">
+                Capacidad Máxima
+            </dt>
+            <dd class = "col Value">
+                @Html.DisplayFor(model => model.Capacidadmaxima)
+            </dd>
+        </div>
+        <div class="row Items">
+            <dt class = "col ValueName d-flex justify-content-end">
+                Aeropuerto
+            </dt>
+            <dd class = "col Value">
+                @Html.DisplayFor(model => model.CodigoaeropuertoNavigation.Codigo)
+            </dd>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Codigo" />
+                <input type="submit" value="Borrar" class="btn btn-danger ActionButtom" />
+            </form>
+            <a asp-action="Index" class="BackButtom">Volver</a>
+        </div>
+    </article>
+    <article class="col"></article>
+</section>

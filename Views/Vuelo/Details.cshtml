@@ -4,32 +4,43 @@
     ViewData["Title"] = "Detalle de Vuelo";
 }
 
-<h1>Detalle de Vuelo</h1>
+<head>
+  <link rel="stylesheet" type="text/css" href="~/css/Interfaz.css">
+</head>
 
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Ruta
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CodigorutaNavigation.Codigo)
-        </dd>
-        <dt class = "col-sm-2">
-            Fecha
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
-        <dt class = "col-sm-2">
-            Capacidad Real
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Capacidadreal)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Editar", "Edit", new { ruta = ViewBag.ruta, fecha = ViewBag.fecha })
-    <a asp-action="Index">Volver</a>
-</div>
+<h1 class="SubTitle">Detalle de Vuelo</h1>
+
+<section class="row">
+    <article class="col"></article>
+    <article class="Card col-6">
+        <div class="row Items">
+            <dt class = "col ValueName d-flex justify-content-end">
+                Ruta
+            </dt>
+            <dd class = "col Value">
+                @Html.DisplayFor(model => model.CodigorutaNavigation.Codigo)
+            </dd>
+        </div>
+        <div class="row Items">
+            <dt class = "col ValueName d-flex justify-content-end">
+                Fecha
+            </dt>
+            <dd class = "col Value">
+                @Html.DisplayFor(model => model.Fecha)
+            </dd>
+        </div>
+        <div class="row Items">
+            <dt class = "col ValueName d-flex justify-content-end">
+                Capacidad Real
+            </dt>
+            <dd class = "col Value">
+                @Html.DisplayFor(model => model.Capacidadreal)
+            </dd>
+        </div>
+        <div class="row d-flex justify-content-center">
+            @Html.ActionLink("Editar", "Edit", new { ruta = ViewBag.ruta, fecha = ViewBag.fecha }, new {@class="ActionButtom"})
+            <a asp-action="Index" class="BackButtom">Volver</a>
+        </div>
+    </article>
+    <article class="col"></article>
+</section>

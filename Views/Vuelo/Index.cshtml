@@ -4,13 +4,18 @@
     ViewData["Title"] = "Vuelo";
 }
 
-<h1>Vuelos</h1>
+<head>
+  <link rel="stylesheet" type="text/css" href="~/css/Interfaz.css">
+  <link rel="stylesheet" href="~/lib/bootstrap/font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
 
-<p>
-    <a asp-action="Create">Agregar</a>
+<h1 class="SubTitle">Vuelos</h1>
+
+<p align="right">
+    <a class="AddBottom" asp-action="Create">Agregar</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="TableHead">
         <tr>
             <th>
                 Ruta
@@ -26,7 +31,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr class="TableElement">
             <td>
                 @Html.DisplayFor(modelItem => item.CodigorutaNavigation.Codigo)
             </td>
@@ -37,9 +42,9 @@
                 @Html.DisplayFor(modelItem => item.Capacidadreal)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { ruta = item.CodigorutaNavigation.Codigo, fecha = item.Fecha })
-                @Html.ActionLink("Detalles", "Details", new { ruta = item.CodigorutaNavigation.Codigo, fecha = item.Fecha })
-                @Html.ActionLink("Borrar", "Delete", new { ruta = item.CodigorutaNavigation.Codigo, fecha = item.Fecha })
+                @Html.ActionLink("", "Edit", new { ruta = item.CodigorutaNavigation.Codigo, fecha = item.Fecha }, new {@class="fa fa-pencil-square-o fa-2x", @style="margin-right:10px;"})
+                @Html.ActionLink("", "Details", new { ruta = item.CodigorutaNavigation.Codigo, fecha = item.Fecha }, new {@class="fa fa-book fa-2x", @style="margin-right:10px;"})
+                @Html.ActionLink("", "Delete", new { ruta = item.CodigorutaNavigation.Codigo, fecha = item.Fecha }, new {@class="fa fa-trash fa-2x", @style="margin-right:10px;"})
             </td>
         </tr>
 }
