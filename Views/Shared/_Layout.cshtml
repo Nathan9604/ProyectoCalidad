@@ -4,32 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Manejo de Vuelos</title>
+    <link rel="stylesheet" href="~/css/Interfaz.css" type="text/css" media="screen" runat="server" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site.css">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Manejo de Vuelos</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Aeropuerto" asp-action="Index">Aeropuerto</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vuelo" asp-action="Index">Vuelo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Ruta" asp-action="Index">Ruta</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <h1 id="Title">
+            Sistema de Control de Vuelos
+        </h1>
+
+        <nav id="NavBar">
+            <a class="NavOption" asp-controller="Home" asp-action="Index">Inicio</a>
+            <a class="NavOption" asp-controller="Aeropuerto" asp-action="Index">Aeropuerto</a>
+            <a class="NavOption" asp-controller="Vuelo" asp-action="Index">Vuelo</a>
+            <a class="NavOption" asp-controller="Ruta" asp-action="Index">Ruta</a>
         </nav>
     </header>
 
@@ -38,10 +27,6 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <p>Esto es un Footer</p>
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,0 +1,137 @@
+#Title{
+    background-color: #01A8E2;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 0px;
+    font-size: 2.5rem;
+}
+
+nav#NavBar{
+    background-color: #56D3E7;
+    border: 0px;
+    padding: 8px;
+}
+
+a.NavOption{
+    color: black;
+    padding: 8px;
+    background-color: #56D3E7;
+}
+
+.NavOption:hover{
+    color: white;
+    padding: 8px;
+    background-color: #014494;
+    border-radius: 13px;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+.SubTitle{
+    margin-top: 0.6em;
+}
+
+.TableHead{
+    background-color: #01A8E2;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #0000005e;
+    text-align: center;
+}
+
+.TableElement{
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #0000005e;
+    text-align: center;
+}
+
+.AddBottom{
+    border-style: solid;
+    border-color: #0000005e;
+    border-width: 2px;
+    border-radius: 13px;
+    text-align: center;
+    padding: 10px;
+    color: black;
+}
+
+.AddBottom:hover{
+    text-decoration: none;
+    color: black;
+    background-color: #56D3E7;
+}
+
+.Card{
+    border-style: solid;
+    border-color: #0000005e;
+    border-width: 2px;
+    border-radius: 13px;
+    color: black;
+    padding: 10px;
+    display: block;
+    margin-top: 30px;
+}
+
+.Card:hover{
+    background-color: #01A8E2;
+}
+
+.AlignCenter{
+    text-align: center;
+    color: black;
+    margin-bottom: 20px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.ActionButtom{
+    border-radius: 13px;
+    background-color: white;
+    color: black;
+    border-style: solid;
+    padding: 4px 10px 0px 10px;
+    border-color: #0000005e;
+    border-width: 2px;
+
+}
+
+.ActionButtom:hover{
+    background-color: #56D3E7;
+    border-color: #0000005e;
+    text-decoration: none;
+    color: black;
+}
+
+.BackButtom{
+    border-style: solid;
+    border-width: 2px;
+    border-color: #0000005e;
+    border-radius: 13px;
+    padding: 4px 10px 0px 10px;
+    margin-left: 1%;
+    color: black;
+    background-color: white;
+}
+
+.BackButtom:hover{
+    color:black;
+    text-decoration: none;
+    background-color: #56D3E7;
+    border-color: #0000005e;
+}
+
+.FirstItem{
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.Items{
+    margin-bottom: 15px;
+}
+
+.Label{
+    text-align: end;
+    margin-top: 1%;
+}

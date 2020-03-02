@@ -4,24 +4,33 @@
     ViewData["Title"] = "Editar Vuelo";
 }
 
-<h1>Editar Vuelo</h1>
+<head>
+  <link rel="stylesheet" type="text/css" href="~/css/Interfaz.css">
+</head>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<h1 class="SubTitle">Editar Vuelo</h1>
+
+<section class="row">
+    <article class="col"></article>
+    <article class="Card col-8">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group row FirstItem">
                 <input type="hidden" asp-for="Codigoruta" />
                 <input type="hidden" asp-for="Fecha" value="@(ViewBag.FechaCorrecta)"/>
-                Capacidad Real
-                <input asp-for="Capacidadreal" class="form-control" />
-                <span asp-validation-for="Capacidadreal" class="text-danger"></span>
+                <div class="col">
+                    Capacidad Real
+                </div>
+                <div class="col-10">
+                    <input asp-for="Capacidadreal" class="form-control" />
+                    <span asp-validation-for="Capacidadreal" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Actualizar" class="btn btn-primary" />
-                <a asp-action="Index">Volver</a>
+            <div class="form-group row d-flex justify-content-center">
+                <input type="submit" value="Actualizar" class="ActionButtom" />
+                <a asp-action="Index" class="BackButtom">Volver</a>
             </div>
         </form>
-    </div>
-</div>
+    </article>
+    <article class="col"></article>
+</section>
