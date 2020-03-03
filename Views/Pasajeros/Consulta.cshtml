@@ -3,13 +3,14 @@
 @{
     ViewData["Title"] = "Consulta";
 
-    var llegaronPorAeropueto = new Dictionary<string,int>();
+    var llegaronPorAeropuerto = new Dictionary<string,int>();
     var partieronPorAeropuerto = new Dictionary<string,int>();
     var llegaronGeneralPorDia = new Dictionary<DateTime,int>();
     var partieronGeneralPorDia = new Dictionary<DateTime,int>();      
     
-    llegaronPorAeropueto.Add("General",0);
-    partieronPorAeropuerto.Add("General",0);          
+    llegaronPorAeropuerto.Add("Todos los aeropuertos",0);
+    partieronPorAeropuerto.Add("Todos los aeropuertos",0);       
+   
 
     Console.WriteLine("Pasajeros por aeropuerto por día:");
     foreach(var p in Model){
@@ -20,27 +21,28 @@
         Console.WriteLine();
 
         //Inicializa mapas con cada aeropuerto existente y cantidades con 0
-        if(!llegaronPorAeropueto.ContainsKey(p.Nombre)){
-            llegaronPorAeropueto.Add(p.Nombre,0);
+        if(!llegaronPorAeropuerto.ContainsKey(p.Nombre)){
+            llegaronPorAeropuerto.Add(p.Nombre,0);
             partieronPorAeropuerto.Add(p.Nombre,0);
         }
         //Inicializa mapas con cada fecha existente y cantidades con 0
-        if(!llegaronGeneralPorDia.ContainsKey(p.Fecha)){
-            llegaronGeneralPorDia.Add(p.Fecha,0);
-            partieronGeneralPorDia.Add(p.Fecha,0);
+        if(!llegaronGeneralPorDia.ContainsKey(p.Fecha.Date)){
+            llegaronGeneralPorDia.Add(p.Fecha.Date,0);
+            partieronGeneralPorDia.Add(p.Fecha.Date,0);
         }
 
         // Suma las cantidades agrupadas a conveniencia
         if(p.Llegada){
-            llegaronPorAeropueto["General"] += p.Cantidad;
-            llegaronPorAeropueto[p.Nombre] += p.Cantidad;
+            llegaronPorAeropuerto["Todos los aeropuertos"] += p.Cantidad;
+            llegaronPorAeropuerto[p.Nombre] += p.Cantidad;
             llegaronGeneralPorDia[p.Fecha] += p.Cantidad;
         }else{
-            partieronPorAeropuerto["General"] += p.Cantidad;
+            partieronPorAeropuerto["Todos los aeropuertos"] += p.Cantidad;
             partieronPorAeropuerto[p.Nombre] += p.Cantidad;
             partieronGeneralPorDia[p.Fecha] += p.Cantidad;
         }
     }
+
     Console.WriteLine();
     Console.WriteLine("Pasajeros por día:");
     foreach(var dia in llegaronGeneralPorDia){
@@ -50,7 +52,7 @@
     }
 
     Console.WriteLine();
-    foreach(var aeropuerto in llegaronPorAeropueto){
+    foreach(var aeropuerto in llegaronPorAeropuerto){
         Console.WriteLine(aeropuerto.Key);
         Console.WriteLine("\tLlegaron: " + aeropuerto.Value);
         Console.WriteLine("\tPartieron: " + partieronPorAeropuerto[aeropuerto.Key]);
@@ -58,5 +60,191 @@
 
 }
 
-<h1>Consulta sobre pasajeros</h1>
+<h1 class="SubTitle">Consulta sobre Pasajeros</h1>
 
+<section class="row">
+    <article class="col"></article>
+        <article class="Card col-8">
+            <form asp-action="Consulta">                  
+                <div class="form-group row FirstItem">
+                    <div class="col">
+                        <label class="control-label" for="FechaInicial">Fecha Inicial</label>
+                    </div>
+                    <div class="col-10">
+                        <input class="form-control" type="date" data-val="true" data-val-required="El campo Fecha Inicial es requerido." id="FechaInicial" name="FechaInicial" value="" required>
+                    </div>
+                </div>
+                <div class="form-group row FirstItem">
+                    <div class="col">
+                        <label class="control-label" for="FechaFinal">Fecha Final</label>
+                    </div>
+                    <div class="col-10">
+                        <input class="form-control" type="date" data-val="true" data-val-required="El campo Fecha Final es requerido." id="FechaFinal" name="FechaFinal" value="" required>
+                    </div>
+                </div>
+                <div class="form-group row d-flex justify-content-center">
+                    <input type="submit" value="Consultar" class="ActionButtom" />
+                </div>
+            </form>
+        </article>
+    <article class="col"></article>
+</section>
+@if(llegaronGeneralPorDia.Count != 0){
+    <table class="table">
+        <thead class="TableHead">
+            <tr>
+                <th colspan=3>
+                    Datos generales
+                </th>
+            </tr>
+        </thead>
+        <thead class="TableHead">
+            <tr>
+                <th>
+                    Aeropuerto
+                </th>
+                <th>
+                    Llegada
+                </th>
+                <th>
+                    Salida
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var aeropuerto in @llegaronPorAeropuerto) {
+                <tr class="TableElement">
+                    <td>
+                        @Html.DisplayFor(modelItem => aeropuerto.Key)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => aeropuerto.Value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => partieronPorAeropuerto[aeropuerto.Key])
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead class="TableHead">
+            <tr>
+                <th colspan=3>
+                    Movimiento diario de pasajeros en todos los aeropuertos
+                </th>
+            </tr>
+        </thead>
+        <thead class="TableHead">
+            <tr>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Entran
+                </th>
+                <th>
+                    Salen
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pasajeros in @llegaronGeneralPorDia) {
+                <tr class="TableElement">
+                    <td>
+                        @Html.DisplayFor(modelItem => pasajeros.Key.Day)/@Html.DisplayFor(modelItem => pasajeros.Key.Month)/@Html.DisplayFor(modelItem => pasajeros.Key.Year)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => pasajeros.Value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => partieronGeneralPorDia[pasajeros.Key])
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead class="TableHead">
+            <tr>
+                <th colspan=3>
+                    Pasajeros por aeropuerto que entran diariamente
+                </th>
+            </tr>
+        </thead>
+        <thead class="TableHead">
+            <tr>
+                <th>
+                    Aeropuerto
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Cantidad
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pasajeros in Model) {
+                @if(pasajeros.Llegada){
+                    <tr class="TableElement">
+                        <td>
+                            @Html.DisplayFor(modelItem => pasajeros.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => pasajeros.Fecha)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => pasajeros.Cantidad)
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead class="TableHead">
+            <tr>
+                <th colspan=3>
+                    Pasajeros por aeropuerto que salen diariamente
+                </th>
+            </tr>
+        </thead>
+        <thead class="TableHead">
+            <tr>
+                <th>
+                    Aeropuerto
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Cantidad
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pasajeros in Model) {
+                @if(!pasajeros.Llegada){
+                    <tr class="TableElement">
+                        <td>
+                            @Html.DisplayFor(modelItem => pasajeros.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => pasajeros.Fecha)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => pasajeros.Cantidad)
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}else{
+    <h2 align="center">El rango de fechas dadas no contiene vuelos en medio</h2>
+}
