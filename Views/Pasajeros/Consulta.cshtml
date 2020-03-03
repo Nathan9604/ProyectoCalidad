@@ -1,0 +1,62 @@
+@model IEnumerable<AeropuertoCalidad.Models.Pasajeros>
+
+@{
+    ViewData["Title"] = "Consulta";
+
+    var llegaronPorAeropueto = new Dictionary<string,int>();
+    var partieronPorAeropuerto = new Dictionary<string,int>();
+    var llegaronGeneralPorDia = new Dictionary<DateTime,int>();
+    var partieronGeneralPorDia = new Dictionary<DateTime,int>();      
+    
+    llegaronPorAeropueto.Add("General",0);
+    partieronPorAeropuerto.Add("General",0);          
+
+    Console.WriteLine("Pasajeros por aeropuerto por día:");
+    foreach(var p in Model){
+        Console.Write(p.Nombre + "(");
+        Console.Write(p.Fecha + ")[");
+        Console.Write(p.Llegada + "]: ");
+        Console.Write(p.Cantidad);
+        Console.WriteLine();
+
+        //Inicializa mapas con cada aeropuerto existente y cantidades con 0
+        if(!llegaronPorAeropueto.ContainsKey(p.Nombre)){
+            llegaronPorAeropueto.Add(p.Nombre,0);
+            partieronPorAeropuerto.Add(p.Nombre,0);
+        }
+        //Inicializa mapas con cada fecha existente y cantidades con 0
+        if(!llegaronGeneralPorDia.ContainsKey(p.Fecha)){
+            llegaronGeneralPorDia.Add(p.Fecha,0);
+            partieronGeneralPorDia.Add(p.Fecha,0);
+        }
+
+        // Suma las cantidades agrupadas a conveniencia
+        if(p.Llegada){
+            llegaronPorAeropueto["General"] += p.Cantidad;
+            llegaronPorAeropueto[p.Nombre] += p.Cantidad;
+            llegaronGeneralPorDia[p.Fecha] += p.Cantidad;
+        }else{
+            partieronPorAeropuerto["General"] += p.Cantidad;
+            partieronPorAeropuerto[p.Nombre] += p.Cantidad;
+            partieronGeneralPorDia[p.Fecha] += p.Cantidad;
+        }
+    }
+    Console.WriteLine();
+    Console.WriteLine("Pasajeros por día:");
+    foreach(var dia in llegaronGeneralPorDia){
+        Console.WriteLine(dia.Key);
+        Console.WriteLine("\tLlegaron: " + dia.Value);
+        Console.WriteLine("\tPartieron: " + partieronGeneralPorDia[dia.Key]);
+    }
+
+    Console.WriteLine();
+    foreach(var aeropuerto in llegaronPorAeropueto){
+        Console.WriteLine(aeropuerto.Key);
+        Console.WriteLine("\tLlegaron: " + aeropuerto.Value);
+        Console.WriteLine("\tPartieron: " + partieronPorAeropuerto[aeropuerto.Key]);
+    }
+
+}
+
+<h1>Consulta sobre pasajeros</h1>
+
