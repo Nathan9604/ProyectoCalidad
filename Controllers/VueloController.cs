@@ -26,20 +26,23 @@ namespace AeropuertoCalidad.Controllers
         }
 
         // GET: Vuelo/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(string ruta, DateTime fecha)
         {
-            if (id == null)
+            if (ruta == null || fecha == null)
             {
                 return NotFound();
             }
 
             var vuelo = await _context.Vuelo
                 .Include(v => v.CodigorutaNavigation)
-                .FirstOrDefaultAsync(m => m.Codigoruta == id);
+                .FirstOrDefaultAsync(m => (m.Codigoruta == ruta && m.Fecha == fecha));
             if (vuelo == null)
             {
                 return NotFound();
             }
+
+            ViewBag.ruta = vuelo.Codigoruta;
+            ViewBag.fecha = vuelo.Fecha;
 
             return View(vuelo);
         }
@@ -69,19 +72,21 @@ namespace AeropuertoCalidad.Controllers
         }
 
         // GET: Vuelo/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(string ruta, DateTime fecha)
         {
-            if (id == null)
+            if (ruta == null || fecha == null)
             {
                 return NotFound();
             }
 
-            var vuelo = await _context.Vuelo.FindAsync(id);
+            var vuelo = await _context.Vuelo.FindAsync(ruta,fecha);
             if (vuelo == null)
             {
                 return NotFound();
             }
             ViewData["Codigoruta"] = new SelectList(_context.Ruta, "Codigo", "Codigo", vuelo.Codigoruta);
+            ViewBag.FechaCorrecta = vuelo.Fecha.ToString("dd/MM/yyyy hh:mm:ss");
+
             return View(vuelo);
         }
 
@@ -90,9 +95,9 @@ namespace AeropuertoCalidad.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Codigoruta,Fecha,Capacidadreal")] Vuelo vuelo)
+        public async Task<IActionResult> Edit([Bind("Codigoruta,Fecha,Capacidadreal")] Vuelo vuelo)
         {
-            if (id != vuelo.Codigoruta)
+            if (String.IsNullOrEmpty(vuelo.Codigoruta))
             {
                 return NotFound();
             }
@@ -106,7 +111,7 @@ namespace AeropuertoCalidad.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VueloExists(vuelo.Codigoruta))
+                    if (!VueloExists(vuelo.Codigoruta, vuelo.Fecha))
                     {
                         return NotFound();
                     }
@@ -117,25 +122,27 @@ namespace AeropuertoCalidad.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            
             ViewData["Codigoruta"] = new SelectList(_context.Ruta, "Codigo", "Codigo", vuelo.Codigoruta);
             return View(vuelo);
         }
 
         // GET: Vuelo/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string ruta, DateTime fecha)
         {
-            if (id == null)
+            if (ruta == null || fecha == null)
             {
                 return NotFound();
             }
 
             var vuelo = await _context.Vuelo
                 .Include(v => v.CodigorutaNavigation)
-                .FirstOrDefaultAsync(m => m.Codigoruta == id);
+                .FirstOrDefaultAsync(m => (m.Codigoruta == ruta && m.Fecha == fecha));
             if (vuelo == null)
             {
                 return NotFound();
             }
+            ViewBag.FechaCorrecta = vuelo.Fecha.ToString("dd/MM/yyyy hh:mm:ss");
 
             return View(vuelo);
         }
@@ -143,17 +150,17 @@ namespace AeropuertoCalidad.Controllers
         // POST: Vuelo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(string codigoRuta, DateTime fecha)
         {
-            var vuelo = await _context.Vuelo.FindAsync(id);
+            var vuelo = await _context.Vuelo.FindAsync(codigoRuta, fecha);
             _context.Vuelo.Remove(vuelo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool VueloExists(string id)
+        private bool VueloExists(string ruta, DateTime fecha)
         {
-            return _context.Vuelo.Any(e => e.Codigoruta == id);
+            return _context.Vuelo.Any(e => (e.Codigoruta == ruta && e.Fecha == fecha));
         }
     }
 }

@@ -1,16 +1,21 @@
 @model IEnumerable<AeropuertoCalidad.Models.Ruta>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Rutas";
 }
 
-<h1>Index</h1>
+<head>
+  <link rel="stylesheet" type="text/css" href="~/css/Interfaz.css">
+  <link rel="stylesheet" href="~/lib/bootstrap/font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<h1 class="SubTitle">Rutas</h1>
+
+<p align="right">
+    <a class="AddBottom" asp-action="Create">Agregar</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="TableHead">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Empresa)
@@ -25,17 +30,17 @@
                 @Html.DisplayNameFor(model => model.Lugar)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Capacidadmaxima)
+                Capacidad Máxima
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CodigoaeropuertoNavigation)
+                Aeropuerto
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr class="TableElement">
             <td>
                 @Html.DisplayFor(modelItem => item.Empresa)
             </td>
@@ -55,9 +60,9 @@
                 @Html.DisplayFor(modelItem => item.CodigoaeropuertoNavigation.Codigo)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Codigo">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Codigo">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Codigo">Delete</a>
+                <a class="fa fa-pencil-square-o fa-2x" asp-action="Edit" asp-route-id="@item.Codigo" style="margin-right:10px;" />
+                <a class="fa fa-book fa-2x" asp-action="Details" asp-route-id="@item.Codigo" style="margin-right:10px;" />
+                <a class="fa fa-trash fa-2x" asp-action="Delete" asp-route-id="@item.Codigo" style="margin-right:10px;" />
             </td>
         </tr>
 }

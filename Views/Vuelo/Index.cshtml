@@ -1,39 +1,50 @@
 @model IEnumerable<AeropuertoCalidad.Models.Vuelo>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Vuelo";
 }
 
-<h1>Index</h1>
+<head>
+  <link rel="stylesheet" type="text/css" href="~/css/Interfaz.css">
+  <link rel="stylesheet" href="~/lib/bootstrap/font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<h1 class="SubTitle">Vuelos</h1>
+
+<p align="right">
+    <a class="AddBottom" asp-action="Create">Agregar</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="TableHead">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Capacidadreal)
+                Ruta
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CodigorutaNavigation)
+                Fecha
+            </th>
+            <th>
+                Capacidad Real
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capacidadreal)
-            </td>
+        <tr class="TableElement">
             <td>
                 @Html.DisplayFor(modelItem => item.CodigorutaNavigation.Codigo)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacidadreal)
+            </td>
+            <td>
+                @Html.ActionLink("", "Edit", new { ruta = item.CodigorutaNavigation.Codigo, fecha = item.Fecha }, new {@class="fa fa-pencil-square-o fa-2x", @style="margin-right:10px;"})
+                @Html.ActionLink("", "Details", new { ruta = item.CodigorutaNavigation.Codigo, fecha = item.Fecha }, new {@class="fa fa-book fa-2x", @style="margin-right:10px;"})
+                @Html.ActionLink("", "Delete", new { ruta = item.CodigorutaNavigation.Codigo, fecha = item.Fecha }, new {@class="fa fa-trash fa-2x", @style="margin-right:10px;"})
             </td>
         </tr>
 }

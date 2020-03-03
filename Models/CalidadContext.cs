@@ -80,10 +80,7 @@ namespace AeropuertoCalidad.Models
                     .HasColumnName("hora")
                     .HasColumnType("time without time zone");
 
-                entity.Property(e => e.Estado)
-                    .HasColumnName("estado")
-                    .HasConversion(e => e.ToString(),
-                    e => (EstadoType)Enum.Parse(typeof(EstadoType), e));
+                entity.Property(e => e.Estado).HasColumnName("estado");
 
                 entity.Property(e => e.Lugar)
                     .IsRequired()

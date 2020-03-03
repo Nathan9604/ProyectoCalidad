@@ -1,32 +1,36 @@
 @model AeropuertoCalidad.Models.Vuelo
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Vuelo";
 }
 
-<h1>Edit</h1>
+<head>
+  <link rel="stylesheet" type="text/css" href="~/css/Interfaz.css">
+</head>
 
-<h4>Vuelo</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<h1 class="SubTitle">Editar Vuelo</h1>
+
+<section class="row">
+    <article class="col"></article>
+    <article class="Card col-8">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Codigoruta" />
-            <input type="hidden" asp-for="Fecha" />
-            <div class="form-group">
-                <label asp-for="Capacidadreal" class="control-label"></label>
-                <input asp-for="Capacidadreal" class="form-control" />
-                <span asp-validation-for="Capacidadreal" class="text-danger"></span>
+            <div class="form-group row FirstItem">
+                <input type="hidden" asp-for="Codigoruta" />
+                <input type="hidden" asp-for="Fecha" value="@(ViewBag.FechaCorrecta)"/>
+                <div class="col">
+                    Capacidad Real
+                </div>
+                <div class="col-10">
+                    <input asp-for="Capacidadreal" class="form-control" />
+                    <span asp-validation-for="Capacidadreal" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="form-group row d-flex justify-content-center">
+                <input type="submit" value="Actualizar" class="ActionButtom" />
+                <a asp-action="Index" class="BackButtom">Volver</a>
             </div>
         </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+    </article>
+    <article class="col"></article>
+</section>

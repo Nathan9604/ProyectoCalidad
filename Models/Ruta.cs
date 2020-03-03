@@ -13,7 +13,7 @@ namespace AeropuertoCalidad.Models
         public string Codigo { get; set; }
         public string Empresa { get; set; }
         public TimeSpan Hora { get; set; }
-        public EstadoType Estado{ get; set; }
+        public Boolean Estado{ get; set; }
         public string Lugar { get; set; }
         public int Capacidadmaxima { get; set; }
         public string Codigoaeropuerto { get; set; }

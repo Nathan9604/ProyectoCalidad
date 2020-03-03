@@ -1,59 +1,87 @@
 @model AeropuertoCalidad.Models.Ruta
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Ruta";
 }
 
-<h1>Create</h1>
+<head>
+  <link rel="stylesheet" type="text/css" href="~/css/Interfaz.css">
+</head>
 
-<h4>Ruta</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<h1 class="SubTitle">Agregar Ruta</h1>
+
+<section class="row">
+    <article class="col"></article>
+    <article class="Card col-8">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Codigo" class="control-label"></label>
-                <input asp-for="Codigo" class="form-control" />
-                <span asp-validation-for="Codigo" class="text-danger"></span>
+            <div class="form-group row FirstItem">
+                <div class="col Label">
+                    Código
+                </div>
+                <div class="col-10">
+                    <input asp-for="Codigo" class="form-control" />
+                    <span asp-validation-for="Codigo" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Empresa" class="control-label"></label>
-                <input asp-for="Empresa" class="form-control" />
-                <span asp-validation-for="Empresa" class="text-danger"></span>
+            <div class="form-group row Items">
+                <div class="col Label">
+                    <label asp-for="Empresa" class="control-label"></label>
+                </div>
+                <div class="col-10">
+                    <input asp-for="Empresa" class="form-control" />
+                    <span asp-validation-for="Empresa" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Hora" class="control-label"></label>
-                <input asp-for="Hora" class="form-control" />
-                <span asp-validation-for="Hora" class="text-danger"></span>
+            <div class="form-group row Items">
+                <div class="col Label">
+                    <label asp-for="Hora" class="control-label"></label>
+                </div>
+                <div class="col-10">
+                    <input asp-for="Hora" class="form-control" />
+                    <span asp-validation-for="Hora" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control"></select>
-                <span asp-validation-for="Estado" class="text-danger"></span>
+            <div class="form-group row Items">
+                <div class="col Label">
+                    <label asp-for="Estado" class="control-label"></label>
+                </div>
+                <div class="col-10">
+                    <input asp-for="Estado" class="form-control"></select>
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Lugar" class="control-label"></label>
-                <input asp-for="Lugar" class="form-control" />
-                <span asp-validation-for="Lugar" class="text-danger"></span>
+            <div class="form-group row Items">
+                <div class="col Label">
+                    <label asp-for="Lugar" class="control-label"></label>
+                </div>
+                <div class="col-10">
+                    <input asp-for="Lugar" class="form-control" />
+                    <span asp-validation-for="Lugar" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Capacidadmaxima" class="control-label"></label>
-                <input asp-for="Capacidadmaxima" class="form-control" />
-                <span asp-validation-for="Capacidadmaxima" class="text-danger"></span>
+            <div class="form-group row Items">
+                <div class="col Label">
+                    Capacidad Máxima
+                </div>
+                <div class="col-10">
+                    <input asp-for="Capacidadmaxima" class="form-control" />
+                    <span asp-validation-for="Capacidadmaxima" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Codigoaeropuerto" class="control-label"></label>
-                <select asp-for="Codigoaeropuerto" class ="form-control" asp-items="ViewBag.Codigoaeropuerto"></select>
+            <div class="form-group row Items">
+                <div class="col Label">
+                    Aeropuerto
+                </div>
+                <div class="col-10">
+                    <select asp-for="Codigoaeropuerto" class ="form-control" asp-items="ViewBag.Codigoaeropuerto"></select>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group row d-flex justify-content-center">
+                <input type="submit" value="Crear" class="ActionButtom" />
+                <a asp-action="Index" class="BackButtom">Volver</a>
             </div>
         </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+    </article>
+    <article class="col"></article>
+</section>
