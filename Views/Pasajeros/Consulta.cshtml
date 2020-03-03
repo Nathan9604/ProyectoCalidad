@@ -11,15 +11,7 @@
     llegaronPorAeropuerto.Add("Todos los aeropuertos",0);
     partieronPorAeropuerto.Add("Todos los aeropuertos",0);       
    
-
-    Console.WriteLine("Pasajeros por aeropuerto por día:");
     foreach(var p in Model){
-        Console.Write(p.Nombre + "(");
-        Console.Write(p.Fecha + ")[");
-        Console.Write(p.Llegada + "]: ");
-        Console.Write(p.Cantidad);
-        Console.WriteLine();
-
         //Inicializa mapas con cada aeropuerto existente y cantidades con 0
         if(!llegaronPorAeropuerto.ContainsKey(p.Nombre)){
             llegaronPorAeropuerto.Add(p.Nombre,0);
@@ -30,7 +22,6 @@
             llegaronGeneralPorDia.Add(p.Fecha.Date,0);
             partieronGeneralPorDia.Add(p.Fecha.Date,0);
         }
-
         // Suma las cantidades agrupadas a conveniencia
         if(p.Llegada){
             llegaronPorAeropuerto["Todos los aeropuertos"] += p.Cantidad;
@@ -42,22 +33,6 @@
             partieronGeneralPorDia[p.Fecha] += p.Cantidad;
         }
     }
-
-    Console.WriteLine();
-    Console.WriteLine("Pasajeros por día:");
-    foreach(var dia in llegaronGeneralPorDia){
-        Console.WriteLine(dia.Key);
-        Console.WriteLine("\tLlegaron: " + dia.Value);
-        Console.WriteLine("\tPartieron: " + partieronGeneralPorDia[dia.Key]);
-    }
-
-    Console.WriteLine();
-    foreach(var aeropuerto in llegaronPorAeropuerto){
-        Console.WriteLine(aeropuerto.Key);
-        Console.WriteLine("\tLlegaron: " + aeropuerto.Value);
-        Console.WriteLine("\tPartieron: " + partieronPorAeropuerto[aeropuerto.Key]);
-    }
-
 }
 
 <h1 class="SubTitle">Consulta sobre Pasajeros</h1>
