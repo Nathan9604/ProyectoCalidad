@@ -48,7 +48,12 @@
                 @Html.DisplayFor(modelItem => item.Hora)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Estado)
+                @if(item.Estado == true){
+                    <label>Entrando</label>
+                }
+                else{
+                    <label>Saliendo</label>
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Lugar)

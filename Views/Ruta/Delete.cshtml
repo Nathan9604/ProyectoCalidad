@@ -17,6 +17,7 @@
         <div class="row Items">
             <dt class = "col ValueName d-flex justify-content-end">
                 @Html.DisplayNameFor(model => model.Empresa)
+            <dt>
             <dd class = "col Value">
                 @Html.DisplayFor(model => model.Empresa)
             </dd>
@@ -34,12 +35,18 @@
                 @Html.DisplayNameFor(model => model.Estado)
             </dt>
             <dd class = "col Value">
-                @Html.DisplayFor(model => model.Estado)
+                @if(Model.Estado == true){
+                    <label>Entrando</label>
+                }
+                else{
+                    <label>Saliendo</label>
+                }
             </dd>
         </div>
         <div class="row Items">
             <dt class = "col ValueName d-flex justify-content-end">
                 @Html.DisplayNameFor(model => model.Lugar)
+            <dt>
             <dd class = "col Value">
                 @Html.DisplayFor(model => model.Lugar)
             </dd>
