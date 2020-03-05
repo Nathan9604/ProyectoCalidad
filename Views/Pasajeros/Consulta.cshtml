@@ -1,37 +1,14 @@
-@model IEnumerable<AeropuertoCalidad.Models.Pasajeros>
+@model AeropuertoCalidad.Models.DatosPasajeros
 
 @{
     ViewData["Title"] = "Consulta";
 
-    var llegaronPorAeropuerto = new Dictionary<string,int>();
-    var partieronPorAeropuerto = new Dictionary<string,int>();
-    var llegaronGeneralPorDia = new Dictionary<DateTime,int>();
-    var partieronGeneralPorDia = new Dictionary<DateTime,int>();      
-    
-    llegaronPorAeropuerto.Add("Todos los aeropuertos",0);
-    partieronPorAeropuerto.Add("Todos los aeropuertos",0);       
-   
-    foreach(var p in Model){
-        //Inicializa mapas con cada aeropuerto existente y cantidades con 0
-        if(!llegaronPorAeropuerto.ContainsKey(p.Nombre)){
-            llegaronPorAeropuerto.Add(p.Nombre,0);
-            partieronPorAeropuerto.Add(p.Nombre,0);
-        }
-        //Inicializa mapas con cada fecha existente y cantidades con 0
-        if(!llegaronGeneralPorDia.ContainsKey(p.Fecha.Date)){
-            llegaronGeneralPorDia.Add(p.Fecha.Date,0);
-            partieronGeneralPorDia.Add(p.Fecha.Date,0);
-        }
-        // Suma las cantidades agrupadas a conveniencia
-        if(p.Llegada){
-            llegaronPorAeropuerto["Todos los aeropuertos"] += p.Cantidad;
-            llegaronPorAeropuerto[p.Nombre] += p.Cantidad;
-            llegaronGeneralPorDia[p.Fecha] += p.Cantidad;
-        }else{
-            partieronPorAeropuerto["Todos los aeropuertos"] += p.Cantidad;
-            partieronPorAeropuerto[p.Nombre] += p.Cantidad;
-            partieronGeneralPorDia[p.Fecha] += p.Cantidad;
-        }
+    var fechaInicial = Model.FechaInicial;
+    var fechaFinal = Model.FechaFinal;
+    var vuelosSemanales = Model.VuelosSemanales;
+
+    for(int i = 0; i < vuelosSemanales.Count();i++){
+        vuelosSemanales.ElementAt(i).debug();
     }
 }
 
@@ -46,7 +23,7 @@
                         <label class="control-label" for="FechaInicial">Fecha Inicial</label>
                     </div>
                     <div class="col-10">
-                        <input class="form-control" type="date" data-val="true" data-val-required="El campo Fecha Inicial es requerido." id="FechaInicial" name="FechaInicial" value="" required>
+                        <input class="form-control" type="date" data-val="true" id="FechaInicial" name="FechaInicial" value=@fechaInicial.ToString("yyyy-MM-dd") required>
                     </div>
                 </div>
                 <div class="form-group row FirstItem">
@@ -54,7 +31,7 @@
                         <label class="control-label" for="FechaFinal">Fecha Final</label>
                     </div>
                     <div class="col-10">
-                        <input class="form-control" type="date" data-val="true" data-val-required="El campo Fecha Final es requerido." id="FechaFinal" name="FechaFinal" value="" required>
+                        <input class="form-control" type="date" data-val="true" id="FechaFinal" name="FechaFinal" value=@fechaFinal.ToString("yyyy-MM-dd") required>
                     </div>
                 </div>
                 <div class="form-group row d-flex justify-content-center">
@@ -64,12 +41,13 @@
         </article>
     <article class="col"></article>
 </section>
-@if(llegaronGeneralPorDia.Count != 0){
+
+@if(vuelosSemanales.Count() != 0){
     <table class="table">
         <thead class="TableHead">
             <tr>
-                <th colspan=3>
-                    Datos generales
+                <th colspan=5>
+                    Movimiento general de pasajeros por aeropuerto
                 </th>
             </tr>
         </thead>
@@ -82,32 +60,47 @@
                     Llegada
                 </th>
                 <th>
+                    Promedio
+                </th>
+                <th>
                     Salida
+                </th>
+                <th>
+                    Promedio
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var aeropuerto in @llegaronPorAeropuerto) {
-                <tr class="TableElement">
-                    <td>
-                        @Html.DisplayFor(modelItem => aeropuerto.Key)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => aeropuerto.Value)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => partieronPorAeropuerto[aeropuerto.Key])
-                    </td>
-                </tr>
+            @for (int i = 0; i < vuelosSemanales.Count(); i++) {
+                @if(vuelosSemanales.ElementAt(i).Dia == "Todos los días"){
+                    <tr class="TableElement">
+                        <td>
+                            @Html.DisplayFor(modelItem => vuelosSemanales.ElementAt(i).Aeropuerto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => vuelosSemanales.ElementAt(i).Llegada) vuelos
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => vuelosSemanales.ElementAt(i).PromedioLlegada) vuelos/día
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => vuelosSemanales.ElementAt(i).Salida) vuelos
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => vuelosSemanales.ElementAt(i).PromedioSalida) vuelos/día
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
 
+    @for (int i = 1; i < vuelosSemanales.Count()/8; i++) {
     <table class="table">
         <thead class="TableHead">
             <tr>
                 <th colspan=3>
-                    Movimiento diario de pasajeros en todos los aeropuertos
+                    Movimiento por día de la semana de pasajeros en "@Html.DisplayFor(modelItem => aeropuerto.Key)"
                 </th>
             </tr>
         </thead>
@@ -125,101 +118,44 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var pasajeros in @llegaronGeneralPorDia) {
-                <tr class="TableElement">
-                    <td>
-                        @Html.DisplayFor(modelItem => pasajeros.Key.Day)/@Html.DisplayFor(modelItem => pasajeros.Key.Month)/@Html.DisplayFor(modelItem => pasajeros.Key.Year)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => pasajeros.Value)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => partieronGeneralPorDia[pasajeros.Key])
-                    </td>
-                </tr>
+            @for (int j = 0; j < 8; j++) {
+            <tr class="TableElement">                   
+                <td>
+                    @switch(pasajeros.Key){
+                        case 1:
+                            <div>Lunes</div>
+                            break;
+                        case 2:
+                            <div>Martes</div>
+                            break;
+                        case 3:
+                            <div>Miércoles</div>
+                            break;
+                        case 4:
+                            <div>Jueves</div>
+                            break;
+                        case 5:
+                            <div>Viernes</div>
+                            break;
+                        case 6:
+                            <div>Sábado</div>
+                            break;
+                        case 0:
+                            <div>Domingo</div>
+                            break;
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => pasajeros.Value)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => llegaronPorAeropuertoPorDiaSemana[aeropuerto.Key][pasajeros.Key])
+                </td>
+            </tr>
             }
         </tbody>
     </table>
 
-    <table class="table">
-        <thead class="TableHead">
-            <tr>
-                <th colspan=3>
-                    Pasajeros por aeropuerto que entran diariamente
-                </th>
-            </tr>
-        </thead>
-        <thead class="TableHead">
-            <tr>
-                <th>
-                    Aeropuerto
-                </th>
-                <th>
-                    Fecha
-                </th>
-                <th>
-                    Cantidad
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var pasajeros in Model) {
-                @if(pasajeros.Llegada){
-                    <tr class="TableElement">
-                        <td>
-                            @Html.DisplayFor(modelItem => pasajeros.Nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => pasajeros.Fecha)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => pasajeros.Cantidad)
-                        </td>
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
-
-    <table class="table">
-        <thead class="TableHead">
-            <tr>
-                <th colspan=3>
-                    Pasajeros por aeropuerto que salen diariamente
-                </th>
-            </tr>
-        </thead>
-        <thead class="TableHead">
-            <tr>
-                <th>
-                    Aeropuerto
-                </th>
-                <th>
-                    Fecha
-                </th>
-                <th>
-                    Cantidad
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var pasajeros in Model) {
-                @if(!pasajeros.Llegada){
-                    <tr class="TableElement">
-                        <td>
-                            @Html.DisplayFor(modelItem => pasajeros.Nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => pasajeros.Fecha)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => pasajeros.Cantidad)
-                        </td>
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
 }else{
     <h2 align="center">El rango de fechas dadas no contiene vuelos en medio</h2>
 }

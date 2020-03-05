@@ -1,5 +1,8 @@
 @{
     ViewData["Title"] = "Pasajeros";
+
+    var today = DateTime.Now;
+    var pastMonth = today.AddMonths(-1);
 }
 
 <h1 class="SubTitle">Consulta sobre Pasajeros</h1>
@@ -13,7 +16,7 @@
                         <label class="control-label" for="FechaInicial">Fecha Inicial</label>
                     </div>
                     <div class="col-10">
-                        <input class="form-control" type="date" data-val="true" data-val-required="El campo Fecha Inicial es requerido." id="FechaInicial" name="FechaInicial" value="" required>
+                        <input class="form-control" type="date" data-val="true" id="FechaInicial" name="FechaInicial" value=@pastMonth.ToString("yyyy-MM-dd") required>
                     </div>
                 </div>
                 <div class="form-group row FirstItem">
@@ -21,7 +24,7 @@
                         <label class="control-label" for="FechaFinal">Fecha Final</label>
                     </div>
                     <div class="col-10">
-                        <input class="form-control" type="date" data-val="true" data-val-required="El campo Fecha Final es requerido." id="FechaFinal" name="FechaFinal" value="" required>
+                        <input class="form-control" type="date" data-val="true" id="FechaFinal" name="FechaFinal" value=@today.ToString("yyyy-MM-dd") required>
                     </div>
                 </div>
                 <div class="form-group row d-flex justify-content-center">
